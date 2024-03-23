@@ -40,7 +40,7 @@ export const userColumns = [
   ];
   
   //temporary data
-  export const userRows = [
+  export let userRows = [
     {
       id: 1,
       username: "Rajeev",
@@ -150,3 +150,21 @@ export const userColumns = [
         age: 32,
       },
   ];
+  
+  
+  export const updateUserDetails = (updatedUserDetails) => {
+    const index = userRows.findIndex(user => user.id === updatedUserDetails.id);
+    if (index !== -1) {
+        userRows = [
+            ...userRows.slice(0, index), 
+            updatedUserDetails,
+            ...userRows.slice(index + 1)
+        ];
+    }
+};
+// Add this function to update userRows
+export const updateUserRows = (userData) => {
+  // Append the new user data to the userRows array
+  userRows = [...userRows, userData];
+};
+

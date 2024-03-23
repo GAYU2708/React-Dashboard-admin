@@ -1,0 +1,36 @@
+/* darkModeStyle.css */
+
+/* Common styles for both light and dark mode */
+
+.app {
+    width: 100%;
+  
+    margin: 0 auto;
+ 
+  }
+  
+  /* Styles for dark mode */
+  
+  .app.dark {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  /* Media queries for responsiveness */
+  
+  @media screen and (max-width: 768px) {
+    .app {
+      padding: 0 10px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .app {
+        font-size: smaller;
+       padding: 0 5px;
+    }
+    id{
+        font-size: small;
+    }
+  }
+  

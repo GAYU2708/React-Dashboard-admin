@@ -13,7 +13,7 @@ export default function List() {
       <Sidebar/>
       <div className="list-Container">
         <Navbar/>
-        <Datatable/>
+        <Datatable />
       </div>
     </div>
   )

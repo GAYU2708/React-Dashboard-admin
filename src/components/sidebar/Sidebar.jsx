@@ -1,4 +1,4 @@
-import React,{useContext} from'react';
+import React, { useContext } from 'react';
 import './sidebar.css';
 import DashboardCustomizeIcon from '@mui/icons-material/DashboardCustomize';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
@@ -12,90 +12,91 @@ import PsychologyTwoToneIcon from '@mui/icons-material/PsychologyTwoTone';
 import SettingsSystemDaydreamTwoToneIcon from '@mui/icons-material/SettingsSystemDaydreamTwoTone';
 import AssignmentIndTwoTone from '@mui/icons-material/AssignmentIndTwoTone';
 import LogoutTwoToneIcon from '@mui/icons-material/LogoutTwoTone';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { DarkModeContext } from '../../contexts/darkModeContexts';
 
-
-export default function Sidebar() {
-
+export default function Sidebar({ handleLogout }) {
   const { dispatch } = useContext(DarkModeContext);
-
 
   return (
     <div className='sidebar'>
       <div className='top'>
-        <Link to="/" style={{textDecoration:"none"}}>
-        <span className='logo'>Rhythm-Admin</span>
+        <Link to="/" style={{ textDecoration: "none" }}>
+          <span className='logo'>Rhythm-Admin</span>
         </Link>
       </div>
-      <hr/>
+      <hr />
       <div className='center'>
         <ul>
           <p className="title">MAIN</p>
           <Link to="/" style={{ textDecoration: "none" }}>
-          <li>
-            <DashboardCustomizeIcon className='icons'/>
-            <span>Dashboard</span>
-          </li>
+            <li>
+              <DashboardCustomizeIcon className='icons' />
+              <span>Dashboard</span>
+            </li>
           </Link>
           <p className="title">LISTS</p>
           <Link to="/users" style={{ textDecoration: "none" }}>
-          <li>
-            <AccountCircleOutlinedIcon className='icons'/>
-            <span>Users</span>
-          </li>
+            <li>
+              <AccountCircleOutlinedIcon className='icons' />
+              <span>Users</span>
+            </li>
           </Link>
           <Link to="/products" style={{ textDecoration: "none" }}>
-          <li>
-            <Inventory2TwoToneIcon className='icons'/>
-            <span>Products</span>
-          </li>
+            <li>
+              <Inventory2TwoToneIcon className='icons' />
+              <span>Products</span>
+            </li>
           </Link>
           <li>
-            <FilterFramesTwoToneIcon className='icons'/>
+            <FilterFramesTwoToneIcon className='icons' />
             <span>Orders</span>
           </li>
           <li>
-            <LocalShippingTwoToneIcon className='icons'/>
+            <LocalShippingTwoToneIcon className='icons' />
             <span>Delivery</span>
           </li>
           <p className="title">USEFUL</p>
+          <Link to='/stats' style={{textDecoration:"none"}}>
           <li>
-            <AutoGraphTwoToneIcon className='icons'/>
+            <AutoGraphTwoToneIcon className='icons' />
             <span>Stats</span>
           </li>
+          </Link>
           <p className="title">SERVICE</p>
           <li>
-            <NotificationsActiveTwoToneIcon className='icons'/>
+            <NotificationsActiveTwoToneIcon className='icons' />
             <span>Notification</span>
           </li>
           <li>
-            <SettingsSystemDaydreamTwoToneIcon className='icons'/>
+            <SettingsSystemDaydreamTwoToneIcon className='icons' />
             <span>System Health</span>
           </li>
           <li>
-            <PsychologyTwoToneIcon className='icons'/>
+            <PsychologyTwoToneIcon className='icons' />
             <span>Logs</span>
           </li>
           <li>
-          <SettingsSuggestTwoToneIcon className='icons'/>
+            <SettingsSuggestTwoToneIcon className='icons' />
             <span>Settings</span>
           </li>
           <p className="title">USER</p>
-          <li>
-            <AssignmentIndTwoTone className='icons'/>
-            <span>Profile</span>
-          </li>
-          <li>
-            <LogoutTwoToneIcon className='icons'/>
+          
+          <Link to="/profile" style={{ textDecoration: "none" }}>
+            <li>
+              <AssignmentIndTwoTone className='icons' />
+              <span>My Profile</span>
+            </li>
+          </Link>
+          <li onClick={handleLogout}>
+            <LogoutTwoToneIcon className='icons' />
             <span>Logout</span>
           </li>
-
         </ul>
       </div>
       <div className='bottom'>
         <div className="colorOptions" onClick={() => dispatch({ type: "LIGHT" })}></div>
-        <div className="colorOptions"  onClick={() => dispatch({ type: "DARK" })}></div>
+        <div className="colorOptions" onClick={() => dispatch({ type: "DARK" })}></div>
       </div>
     </div>
   )

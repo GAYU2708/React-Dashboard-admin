@@ -9,6 +9,7 @@ import ChatBubbleOutlineOutlinedIcon from '@mui/icons-material/ChatBubbleOutline
 import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import { DarkModeContext } from '../../contexts/darkModeContexts';
+import {Link} from 'react-router-dom';
 
 export default function Navbar() {
   const { darkMode, dispatch } = useContext(DarkModeContext);
@@ -50,7 +51,10 @@ export default function Navbar() {
             <ListAltOutlinedIcon className='icon' />
           </div>
           <div className="item">
+            <Link to='/profile'>
+
             <img src='https://images.pexels.com/photos/2816544/pexels-photo-2816544.jpeg?auto=compress&cs=tinysrgb&w=600' alt="profile" className='avatar' />
+            </Link>
           </div>
         </div>
       </div>

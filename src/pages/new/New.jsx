@@ -1,24 +1,37 @@
-
 import React, { useState } from 'react';
 import './new.css';
 import Sidebar from '../../components/sidebar/Sidebar';
 import Navbar from '../../components/navbar/Navbar';
-import DriveFolderUploadOutlinedIcon from '@mui/icons-material/DriveFolderUploadOutlined';
+import { Form, Input, Button, Modal } from 'antd';
+import DriveFolderUploadIcon from '@mui/icons-material/DriveFolderUpload';
 
 export default function New({ inputs, title, addUser }) {
   const [file, setFile] = useState('');
   const [formData, setFormData] = useState({});
+  const [modalVisible, setModalVisible] = useState(false);
+  const [status, setStatus] = useState(null); 
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    addUser(formData);
-    setFormData({});
-    setFile('');
-    console.log(addUser);
+  const handleModalCancel = () => {
+    setModalVisible(false);
+  };
+
+  const handleModalSubmit = () => {
+  
+    setTimeout(() => {
+      addUser(formData);
+      setFormData({});
+      setFile('');
+      setModalVisible(false);
+      setStatus('success');
+    }, 1000); 
+  };
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]);
   };
 
   return (
@@ -41,39 +54,56 @@ export default function New({ inputs, title, addUser }) {
             />
           </div>
           <div className="right-n">
-            <form onSubmit={handleSubmit}>
+            <Form onFinish={handleModalSubmit}>
               <div className="formInput">
                 <label htmlFor="file">
-                  Image: <DriveFolderUploadOutlinedIcon className="icon-n" />
+                  Image: <DriveFolderUploadIcon className="icon-n" />
                 </label>
                 <input
                   type="file"
                   id="file"
-                  onChange={(e) => setFile(e.target.files[0])}
+                  onChange={handleFileChange}
                   style={{ display: 'none' }}
                 />
               </div>
 
-              {inputs.map((input) => {
-                return (
-                  <div className="formInput" key={input.id}>
-                    <label>{input.label}</label>
-                    <input
-                      type={input.type}
-                      name={input.label.toLowerCase()} 
-                      placeholder={input.placeholder}
-                      value={formData[input.label.toLowerCase()] || ''}
-                      onChange={handleChange}
-                    />
-                  </div>
-                );
-              })}
+              {inputs.map((input) => (
+                <div className="formInput" key={input.id}>
+                  <label>{input.label}</label>
+                  <Input
+                    type={input.type}
+                    name={input.label.toLowerCase()}
+                    placeholder={input.placeholder}
+                    value={formData[input.label.toLowerCase()] || ''}
+                    onChange={handleChange}
+                  />
+                </div>
+              ))}
 
-              <button type="submit">Send</button>
-            </form>
+              <Button type="primary" htmlType="submit">
+                Send
+              </Button>
+            </Form>
+          
+            {status === 'success' && <div style={{ color: 'green' }}>Form submitted successfully!</div>}
           </div>
         </div>
       </div>
+      <Modal
+        title="Confirm Submission"
+        visible={modalVisible}
+        onCancel={handleModalCancel}
+        footer={[
+          <Button key="cancel" onClick={handleModalCancel}>
+            Cancel
+          </Button>,
+          <Button key="submit" type="primary" onClick={handleModalSubmit}>
+            Submit
+          </Button>,
+        ]}
+      >
+        Are you sure you want to submit the form?
+      </Modal>
     </div>
   );
 }
